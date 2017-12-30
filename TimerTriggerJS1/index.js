@@ -17,7 +17,7 @@ module.exports = function (context, myTimer) {
 
     processResponses(context);
 
-    context.done();
+   // context.done();
 };
 
 function processResponses(context) {
@@ -27,7 +27,7 @@ function processResponses(context) {
     );
 }
 
-function notification({ count = 0, fallback = 0, percent = 0.0, context = console }) {
+function notification({ count = 0, fallback = 0, percent = 0.0, context = null }) {
     if (percent * 100 >= process.env.THRESHOLD) {
         const mailBody = format(
             process.env.MAIL_TEMPLATE,
@@ -48,4 +48,6 @@ function notification({ count = 0, fallback = 0, percent = 0.0, context = consol
     } else {
         context.log(`percent: ${percent} time: ${moment().format()}`);
     }
+
+    context.done();
 }

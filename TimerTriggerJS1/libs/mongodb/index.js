@@ -14,9 +14,7 @@ exports.processQuery = (queryFn, processDataFn) => {
         .then(({ result = null, dbs = [] }) => {
             result
                 .then(data => processDataFn(data))
-                .then(() => dbs.forEach(db => {
-                    db.close();
-                }))
+                .then(() => dbs.forEach(db => db.close()))
                 .catch(e => console.error(e));
         })
         .catch(e => console.error(e));
