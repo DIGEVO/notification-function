@@ -8,7 +8,7 @@ const mongoClient = require('./libs/mongodb');
 const mongoUtil = require('./libs/mongoutils');
 
 module.exports = function (context, myTimer) {
-    
+
     if (myTimer.isPastDue) {
         context.log('JavaScript is running late!');
     }
@@ -19,7 +19,7 @@ module.exports = function (context, myTimer) {
 function processResponses(context) {
     mongoClient.processQuery(
         mongoUtil.getDataQuery.bind(null, process.env.BOT_ID, moment().subtract(1, 'hour').format(), moment().format()),
-        ([data]) => notification(Object.assign(data, { context: context }) || { context: context })
+        ([data]) => notification(data ? Object.assign(data, { context: context }) : { context: context })
     );
 }
 
