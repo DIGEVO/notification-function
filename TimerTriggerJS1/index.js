@@ -27,7 +27,7 @@ function notification({ count = 0, fallback = 0, percent = 0.0, context = null }
     if (percent * 100 >= process.env.THRESHOLD) {
         const mailBody = format(
             process.env.MAIL_TEMPLATE,
-            `${moment().subtract(1, 'day').subtract(1, 'hour').format('h:m')}-${moment().subtract(1, 'day').format('h:m')}`,
+            `${moment().subtract(1, 'hour').tz(process.env.TZ).format('h:m')}-${moment().tz(process.env.TZ).format('h:m')}`,
             process.env.BOT_ID,
             `${process.env.THRESHOLD}%`,
             percent * 100);
