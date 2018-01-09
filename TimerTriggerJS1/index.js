@@ -32,7 +32,7 @@ function notification({ count = 0, fallback = 0, percent = 0.0, context = null }
             `${process.env.THRESHOLD}%`,//Threshold.
             count,//Quantities.
             fallback,//Fallbacks.
-            percent * 100);//Percent.
+            `${percent * 100}%`);//Percent.
 
         const send = require('gmail-send')({
             user: process.env.GMAIL_USER,
