@@ -27,10 +27,12 @@ function notification({ count = 0, fallback = 0, percent = 0.0, context = null }
     if (percent * 100 >= process.env.THRESHOLD) {
         const mailBody = format(
             process.env.MAIL_TEMPLATE,
-            `${moment().subtract(1, 'hour').tz(process.env.TZ).format('HH:mm')}-${moment().tz(process.env.TZ).format('HH:mm')}`,
-            process.env.BOT_ID,
-            `${process.env.THRESHOLD}%`,
-            percent * 100);
+            `${moment().subtract(1, 'hour').tz(process.env.TZ).format('HH:mm')}-${moment().tz(process.env.TZ).format('HH:mm')}`,//Interval.
+            process.env.BOT_ID,//Bot Id.
+            `${process.env.THRESHOLD}%`,//Threshold.
+            count,//Quantities.
+            fallback,//Fallbacks.
+            percent * 100);//Percent.
 
         const send = require('gmail-send')({
             user: process.env.GMAIL_USER,
